@@ -1,32 +1,26 @@
 import { PageLayout } from "@/components/layout/page-layout";
 import { MoodSelection } from "@/components/mood/mood-selection";
+import { CategorySelection } from "@/components/mood/category-selection";
 
 export default function Home() {
   return (
     <PageLayout>
-      {/* Mood Selection Component */}
-      <MoodSelection />
-
-      {/* Category Selection Placeholder */}
-      <section className="mb-12">
-        <h2 className="mb-6 text-center text-3xl font-bold">
-          Choose your content category
-        </h2>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
-          {["Film", "Music", "Video", "Memes", "WTF?"].map((category) => (
-            <div
-              key={category}
-              className="flex aspect-square items-center justify-center rounded-lg bg-muted p-4 text-center text-xl font-semibold shadow-sm transition-transform hover:scale-105 hover:bg-accent cursor-pointer"
-            >
-              {category}
-            </div>
-          ))}
+      {/* Mood Selection - Now in vertical layout */}
+      <div className="space-y-5 mb-12">
+        {/* Mood Selection */}
+        <div className="bg-background/50 p-6 rounded-lg">
+          <MoodSelection />
         </div>
-      </section>
+
+        {/* Category Selection */}
+        <div className="bg-background/50 p-6 rounded-lg">
+          <CategorySelection />
+        </div>
+      </div>
 
       {/* Content Suggestions Placeholder */}
       <section>
-        <h2 className="mb-6 text-center text-3xl font-bold">
+        <h2 className="mb-6 text-center text-2xl font-bold">
           Your Personalized Suggestions
         </h2>
         <div className="rounded-lg border border-border bg-card p-8 shadow-sm text-center">

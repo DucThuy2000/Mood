@@ -7,20 +7,30 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface EmojiItemProps {
   mood: MoodType;
   moodData: MoodData;
   onSelect: (mood: MoodType) => void;
+  isSelected?: boolean;
 }
 
-export const EmojiItem = ({ mood, moodData, onSelect }: EmojiItemProps) => {
+export const EmojiItem = ({
+  mood,
+  moodData,
+  onSelect,
+  isSelected = false,
+}: EmojiItemProps) => {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <button
-            className="text-3xl p-2 transition-all duration-200 hover:scale-125 focus:outline-none cursor-pointer"
+            className={cn(
+              "text-3xl p-2 transition-all duration-300 hover:scale-125 focus:outline-none cursor-pointer",
+              isSelected && "scale-180 text-primary" // Scale up when selected
+            )}
             onClick={() => onSelect(mood)}
             aria-label={`Select ${moodData.name} mood`}
           >
@@ -29,7 +39,9 @@ export const EmojiItem = ({ mood, moodData, onSelect }: EmojiItemProps) => {
         </TooltipTrigger>
         <TooltipContent>
           <div className="text-center">
-            <p className="font-medium">{moodData.name}</p>
+            <p className={cn("font-medium", isSelected && "font-bold")}>
+              {moodData.name}
+            </p>
             <p className="text-xs text-muted-foreground">
               {moodData.description}
             </p>

@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import { MOOD_TYPES } from "@/lib/constants/mood";
 import { MoodType } from "@/lib/types/mood";
-import { selectedMoodAtom, userMoodHistoryAtom } from "@/lib/stores/moodAtom";
+import { selectedMoodAtom } from "@/lib/stores/moodAtom";
 import { EmojiItem } from "./emoji-item";
 
 export const MoodPicker = () => {
@@ -11,7 +11,7 @@ export const MoodPicker = () => {
 
   // Handle mood selection
   const handleMoodSelect = (mood: MoodType) => {
-    setSelectedMood(mood);
+    setSelectedMood(mood === selectedMood ? null : mood);
   };
 
   return (
@@ -29,6 +29,7 @@ export const MoodPicker = () => {
             mood={key as MoodType}
             moodData={data}
             onSelect={handleMoodSelect}
+            isSelected={selectedMood === key}
           />
         ))}
       </div>

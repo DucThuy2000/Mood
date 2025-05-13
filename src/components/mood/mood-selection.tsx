@@ -1,10 +1,14 @@
 "use client";
 
+import { useAtom } from "jotai";
+import { selectedMoodAtom } from "@/lib/stores/moodAtom";
 import { MoodPicker } from "./mood-picker";
 import { MoodInput } from "./mood-input";
 import { MoodTabs } from "./mood-tabs";
 
 export const MoodSelection = () => {
+  const [selectedMood] = useAtom(selectedMoodAtom);
+
   const tabs = [
     {
       id: "picker",
@@ -19,18 +23,15 @@ export const MoodSelection = () => {
   ];
 
   return (
-    <section className="py-10">
-      <div className="container">
-        <h1 className="text-4xl font-bold text-center mb-6">
-          How are you feeling?
-        </h1>
-        <p className="text-center text-muted-foreground mb-8">
-          Let's figure out your current mood so we can suggest the perfect
-          content for you!
-        </p>
+    <section className="transition-all duration-300">
+      <h1 className="text-4xl font-bold mb-2 text-center">
+        How are you feeling?
+      </h1>
+      <p className="text-muted-foreground mb-6 text-center">
+        Tell us how you're feeling to get content suggestions
+      </p>
 
-        <MoodTabs defaultTab="picker" tabs={tabs} />
-      </div>
+      <MoodTabs defaultTab="picker" tabs={tabs} />
     </section>
   );
 };

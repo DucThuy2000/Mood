@@ -18,7 +18,7 @@ Currently, I have no designs or templates for this website. Pls give me some ref
 # Category Selection:
 
 - Standard categories like film, video, music, memes.
-- Add “WTF?” or “Surprise me” category for random chaos.
+- Use list of icons for user to select category to save the width, height.
 
 # Suggestion Generator:
 
@@ -26,7 +26,7 @@ Currently, I have no designs or templates for this website. Pls give me some ref
 
 - Generator for film:
   --> Show list suggestion films
-  --> Each item contains image, name, category, link for the film (netflix, toomva, fshare, yeuphim.cc, rophim.net)
+  --> Each item contains image, name, category, link for the films
 
 - Generator for music / video:
   --> Embedded youtube link in website
