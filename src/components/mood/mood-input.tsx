@@ -9,6 +9,7 @@ import {
   userMoodHistoryAtom,
 } from "@/lib/stores/moodAtom";
 import { Button } from "@/components/ui/button";
+import { MOOD_TYPES } from "@/lib/constants/mood";
 
 export const MoodInput = () => {
   const [inputText, setInputText] = useAtom(moodTextInputAtom);
@@ -21,105 +22,20 @@ export const MoodInput = () => {
   const detectMood = (text: string): MoodType | null => {
     const lowerText = text.toLowerCase();
 
-    const moodKeywords: Record<MoodType, string[]> = {
-      HAPPY: [
-        "happy",
-        "joy",
-        "glad",
-        "excellent",
-        "good",
-        "great",
-        "wonderful",
-        "cheerful",
-        "delighted",
-      ],
-      EXCITED: [
-        "excited",
-        "thrilled",
-        "eager",
-        "enthusiastic",
-        "pumped",
-        "stoked",
-        "hyped",
-        "ecstatic",
-        "amped",
-      ],
-      RELAXED: [
-        "relaxed",
-        "calm",
-        "peaceful",
-        "chill",
-        "zen",
-        "tranquil",
-        "serene",
-        "laid back",
-        "content",
-      ],
-      NEUTRAL: [
-        "fine",
-        "okay",
-        "neutral",
-        "alright",
-        "meh",
-        "so-so",
-        "average",
-        "neither",
-        "indifferent",
-      ],
-      BORED: [
-        "bored",
-        "boring",
-        "dull",
-        "uninterested",
-        "tedious",
-        "mundane",
-        "monotonous",
-        "tired of",
-        "uninspired",
-      ],
-      SAD: [
-        "sad",
-        "unhappy",
-        "depressed",
-        "down",
-        "blue",
-        "gloomy",
-        "miserable",
-        "heartbroken",
-        "upset",
-      ],
-      ANGRY: [
-        "angry",
-        "mad",
-        "frustrated",
-        "annoyed",
-        "irritated",
-        "furious",
-        "enraged",
-        "outraged",
-        "pissed",
-      ],
-      CONFUSED: [
-        "confused",
-        "unsure",
-        "perplexed",
-        "baffled",
-        "uncertain",
-        "puzzled",
-        "bewildered",
-        "lost",
-        "disoriented",
-      ],
-      RANDOM: [],
-    };
+    // Count matching mood names and descriptions in the text
+    const moodCounts = Object.entries(MOOD_TYPES).reduce(
+      (counts, [mood, details]) => {
+        const { name, description } = details;
 
-    // Count matching keywords for each mood
-    const moodCounts = Object.entries(moodKeywords).reduce(
-      (counts, [mood, keywords]) => {
-        const matchCount = keywords.filter((word) =>
-          lowerText.includes(word)
-        ).length;
-        counts[mood as MoodType] = matchCount;
+        // Check if mood name or description appears in the text
+        const nameMatch = lowerText.includes(name.toLowerCase());
+        const descMatch = lowerText.includes(description.toLowerCase());
+        const keywordsMatch = details.keywords.some((keyword) =>
+          lowerText.includes(keyword.toLowerCase())
+        );
+
+        counts[mood as MoodType] =
+          nameMatch || descMatch || keywordsMatch ? 1 : 0;
         return counts;
       },
       {} as Record<MoodType, number>
