@@ -11,16 +11,10 @@ import {
 interface EmojiItemProps {
   mood: MoodType;
   moodData: MoodData;
-  selected: boolean;
   onSelect: (mood: MoodType) => void;
 }
 
-export const EmojiItem = ({
-  mood,
-  moodData,
-  selected,
-  onSelect,
-}: EmojiItemProps) => {
+export const EmojiItem = ({ mood, moodData, onSelect }: EmojiItemProps) => {
   return (
     <TooltipProvider>
       <Tooltip>
