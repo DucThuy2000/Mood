@@ -1,7 +1,7 @@
 import { MOOD_TYPES, CONTENT_CATEGORIES } from "../constants/mood";
 
 export type MoodType = keyof typeof MOOD_TYPES;
-export type MoodData = (typeof MOOD_TYPES)[MoodType];
+export type MoodData = (typeof MOOD_TYPES)[MoodType] & { gifUrl?: string };
 
 export type ContentCategory = keyof typeof CONTENT_CATEGORIES;
 export type ContentCategoryData = (typeof CONTENT_CATEGORIES)[ContentCategory];
